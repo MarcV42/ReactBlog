@@ -1,6 +1,6 @@
 package de.marcv42.backend.service;
 
-import com.mongodb.Tag;
+import de.marcv42.backend.model.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
