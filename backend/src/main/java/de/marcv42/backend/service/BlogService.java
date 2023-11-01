@@ -1,7 +1,15 @@
 package de.marcv42.backend.service;
 
+import de.marcv42.backend.model.BlogEntry;
+import de.marcv42.backend.model.BlogResponse;
+import de.marcv42.backend.model.NewBlog;
+import de.marcv42.backend.model.UpdatedBlogEntry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
