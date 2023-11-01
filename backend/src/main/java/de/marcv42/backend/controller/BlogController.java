@@ -4,6 +4,7 @@ import de.marcv42.backend.model.NewBlog;
 import de.marcv42.backend.model.UpdatedBlogEntry;
 import de.marcv42.backend.service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,6 @@ public class BlogController
     @ResponseStatus(HttpStatus.CREATED)
     public BlogResponse addBlog(@RequestBody NewBlog newBlog)
     {
-        //this get the github Id
         return blogService.addBlogEntry(newBlog);
     }
 
