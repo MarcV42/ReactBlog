@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/blogs
+Content-Type: application/json
+
+{
+  "title": "title 1",
+  "content": "content 1"
+}
