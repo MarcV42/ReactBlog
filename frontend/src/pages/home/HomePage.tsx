@@ -94,7 +94,7 @@ export default function HomePage() {
 
     const whoAmI = () => {
         axios
-            .get('/api/user')
+            .get('/api/user/me')
             .then((response) => {
                 setUserId(response.data); // Benutzer-ID in den State setzen
             })
