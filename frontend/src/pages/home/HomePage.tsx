@@ -107,8 +107,10 @@ export default function HomePage() {
         setIsLoggedIn(true);
     };
 
-    const logout = () => {
-        // Define the 'host' variable here
+
+    // Logout-Funktion
+    const handleLogout = () => {
+
         const host =
             window.location.host === 'localhost:5173'
                 ? 'http://localhost:8080'
@@ -124,7 +126,8 @@ export default function HomePage() {
             oauthPopup.close();
         }
         setIsLoggedIn(false);
-        // Nach dem Logout kannst du zur Startseite oder einer anderen geeigneten Seite umleiten.
+
+
         navigateTo('/');
     }
 
@@ -134,11 +137,11 @@ export default function HomePage() {
         const worksheet = workbook.addWorksheet('Daten');
 
         // Überschriften hinzufügen
-        worksheet.addRow(['Author', 'Title', 'Content', 'Hashtags', 'Entry Time']);
+        worksheet.addRow(['ID', 'Author', 'Title', 'Content', 'Hashtags', 'Entry Time']);
 
         // Daten aus der Datenbank in Excel einfügen
         entries.forEach((entry) => {
-            worksheet.addRow([entry.author, entry.title, entry.content, entry.hashtags, entry.timeCreated]);
+            worksheet.addRow([entry.id, entry.author, entry.title, entry.content, entry.hashtags, entry.timeCreated]);
         });
 
         // Die Excel-Datei als Blob speichern
@@ -160,7 +163,11 @@ export default function HomePage() {
                 <button onClick={login}> Log in</button>
                 <button onClick={whoAmI}> Show my user ID</button>
                 {isLoggedIn && <p>You are logged in successfully! {userId} (User ID)</p>} {/* Benutzer-ID anzeigen */}
-                {isLoggedIn && <button onClick={logout}>Logout</button>}
+                {isLoggedIn && (
+                    <button type="button" onClick={handleLogout}>
+                        Logout
+                    </button>
+                )}
                 <NewEntryButton type="button" onClick={() => navigateTo('/newentry')}>
                     <AddButtonIcon src={AddIcon} alt="Add Icon" />New Entry
                 </NewEntryButton>
