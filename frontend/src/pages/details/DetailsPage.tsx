@@ -178,11 +178,11 @@ export default function DetailsPage() {
                 </Button>
             </ButtonContainer>
             <TagList>
-                {blogEntry?.hashtags.map(hashtag => {
-                        return <Tag>{hashtag}</Tag>
-                    }
-                )}
+                {blogEntry?.hashtags.map((hashtag, index) => (
+                    <Tag key={index}>{hashtag}</Tag>
+                ))}
             </TagList>
+
         </Container>
     </>
 }

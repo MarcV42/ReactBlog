@@ -96,6 +96,8 @@ const TagList = styled.ul`
   }
 `;
 
+
+
 const Tag = styled.li`
   padding: 0.2em;
   font-size: 0.9em;
@@ -104,6 +106,7 @@ const Tag = styled.li`
     font-size: 0.7em; // Kleinere Schriftgröße für Tags in der mobilen Ansicht
   }
 `;
+
 
 export default function EntryComponent(props: props) {
     const date: string = new Date(props.blogEntry.timeCreated).toLocaleDateString();
@@ -130,7 +133,6 @@ export default function EntryComponent(props: props) {
     const mainTextfieldText = props.blogEntry.content;
     const truncatedString = truncateString(mainTextfieldText, 122);
 
-
     return (
         <Container>
             <Title>{props.blogEntry.title}</Title>
@@ -144,9 +146,9 @@ export default function EntryComponent(props: props) {
                 Show more
             </Button>
             <TagList>
-                {props.blogEntry.hashtags.map((hashtag) => {
-                    return <Tag>{hashtag}</Tag>;
-                })}
+                {props.blogEntry.hashtags.map((hashtag, index) => (
+                    <Tag key={index}>{hashtag}</Tag>
+                ))}
             </TagList>
         </Container>
     );
