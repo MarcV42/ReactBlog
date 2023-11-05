@@ -69,7 +69,8 @@ export default function HomePage() {
                 setEntries(response.data);
             })
             .catch((error) => {
-                console.error('Error found', error);
+                //Fehler-Popup
+                window.alert('Error found: ' + error.message);
             });
     };
 
@@ -83,14 +84,12 @@ export default function HomePage() {
                 ? 'http://localhost:8080'
                 : window.location.origin;
 
-
         // Assuming this is where you handle the login process
         window.open(host + '/oauth2/authorization/github');
 
         // Once the login is successful, call handleLoginSuccess
         handleLoginSuccess();
     };
-
 
     const whoAmI = () => {
         axios
@@ -99,7 +98,8 @@ export default function HomePage() {
                 setUserId(response.data); // Benutzer-ID in den State setzen
             })
             .catch((error) => {
-                console.error('Error found', error);
+                // Fehler-Popup
+                window.alert('Error found: ' + error.message);
             });
     };
 
@@ -107,10 +107,8 @@ export default function HomePage() {
         setIsLoggedIn(true);
     };
 
-
     // Logout-Funktion
     const handleLogout = () => {
-
         const host =
             window.location.host === 'localhost:5173'
                 ? 'http://localhost:8080'
@@ -127,9 +125,8 @@ export default function HomePage() {
         }
         setIsLoggedIn(false);
 
-
         navigateTo('/');
-    }
+    };
 
     const ExcelExport = () => {
         // Erstelle ein neues Excel-Arbeitsbuch
@@ -153,7 +150,7 @@ export default function HomePage() {
             // Die Excel-Datei herunterladen
             saveAs(blob, 'export.xlsx');
         });
-    }
+    };
 
     return (
         <>
@@ -182,4 +179,3 @@ export default function HomePage() {
         </>
     );
 }
-

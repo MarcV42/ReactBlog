@@ -1,12 +1,11 @@
-import {BlogEntry} from "../../model/BlogEntryModel.tsx";
-import {useNavigate, useParams} from "react-router-dom";
+import { BlogEntry } from "../../model/BlogEntryModel.tsx";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import AppHeader from "../../components/AppHeader.tsx";
 import styled from "styled-components";
 import MinusSvg from "../../assets/minus-circle.svg";
 import PlusSvg from "../../assets/plus-circle.svg";
-
 
 const EditForm = styled.form`
   display: flex;
@@ -70,7 +69,7 @@ const ButtonImage = styled.img`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
+  display: flex;
   gap: 0.6em;
   justify-content: stretch;
 `;
@@ -85,10 +84,10 @@ const Button = styled.button`
   font-size: 1.2em;
 `;
 
-export default function EditBlogentry(){
-    const navigateTo = useNavigate()
-    const {id} = useParams();
-    const [blogentry, setBlogentry] = useState<BlogEntry>()
+export default function EditBlogentry() {
+    const navigateTo = useNavigate();
+    const { id } = useParams();
+    const [blogentry, setBlogentry] = useState<BlogEntry>();
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
 
@@ -98,7 +97,7 @@ export default function EditBlogentry(){
                 const response = await axios(`/api/blogs/${id}`);
                 setBlogentry(response.data);
                 setLoading(false);
-            } catch (error) {
+            } catch (err) {
                 setError(true);
                 setLoading(false);
             }
@@ -106,54 +105,52 @@ export default function EditBlogentry(){
         fetchBlog().then();
     }, [id]);
 
-
     const deleteTag = (index: number) => {
         if (blogentry && blogentry.hashtags) {
             const newTags = [...blogentry.hashtags];
             newTags.splice(index, 1);
-            setBlogentry({...blogentry, hashtags: newTags});
+            setBlogentry({ ...blogentry, hashtags: newTags });
         }
     };
 
     const insertTag = (index: number) => {
         if (blogentry && blogentry.hashtags) {
             const newTags = [...blogentry.hashtags];
-            newTags.splice(index + 1, 0, ""); // Füge ein leeres Tag nach dem aktuellen Index hinzu
+            newTags.splice(index + 1, 0, "");
             setBlogentry({ ...blogentry, hashtags: newTags });
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (blogentry) {
             const mytags = blogentry.hashtags.filter((tag) => tag !== "");
+            const date = blogentry.timeCreated
+                ? new Date(blogentry.timeCreated)
+                : new Date();
+            const formattedDate = date.toISOString();
 
-            console.log(blogentry)
-            console.log(mytags)
-            const date = blogentry.timeCreated ? new Date(blogentry.timeCreated) : new Date();
-            const formattedDate = date.toISOString()
+            const changedBlogEntry: BlogEntry = {
+                id: blogentry.id,
+                title: blogentry.title,
+                content: blogentry.content,
+                hashtags: mytags,
+                timeCreated: formattedDate,
+                author: blogentry.author,
+            };
 
-            const changedBlogEntry: BlogEntry =
-                {
-                    id: blogentry.id,
-                    title: blogentry.title,
-                    content: blogentry.content,
-                    hashtags: mytags,
-                    timeCreated: formattedDate,
-                    author: blogentry.author,
-                };
-            axios
-                .put("/api/blogs/" + id, changedBlogEntry)
-                .then(() => navigateTo("/"))
-                .catch((error) => {
-                    console.error("Fehler beim Speichern:", error);
-                });
+            try {
+                await axios.put("/api/blogs/" + id, changedBlogEntry);
+                navigateTo("/");
+            } catch (err) {
+                setError(true);
+            }
         }
-    }
+    };
 
+    if (loading) return <div>Loading...</div>;
 
-    if (loading) return <div>Loading...</div>
-    if (error) return <div>Something went wrong</div>
+    if (error) return <div>Something went wrong</div>;
 
     return (
         <>
@@ -195,7 +192,7 @@ export default function EditBlogentry(){
                                         <TagButton type={"button"} onClick={() => deleteTag(index)}>
                                             <ButtonImage src={MinusSvg} alt="Reduce Icon" />
                                         </TagButton>
-                                        <TagButton type={"button"} onClick={() => insertTag(index)}> {/* Plus-Schaltfläche hinzugefügt */}
+                                        <TagButton type={"button"} onClick={() => insertTag(index)}>
                                             <ButtonImage src={PlusSvg} alt="Add Icon" />
                                         </TagButton>
                                     </SingleTag>
@@ -207,9 +204,7 @@ export default function EditBlogentry(){
                     <Button type="button" onClick={() => navigateTo("/")}>
                         Discard
                     </Button>
-                    <Button type="submit" onClick={handleSubmit}>
-                        Save
-                    </Button>
+                    <Button type="submit">Save</Button>
                 </ButtonContainer>
             </EditForm>
         </>

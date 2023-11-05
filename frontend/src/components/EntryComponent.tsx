@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BookmarkSvg from "../assets/bookmark.svg";
 
-
 export type props = {
     blogEntry: BlogEntry;
 };
@@ -19,7 +18,7 @@ const Container = styled.li`
   gap: 0.4em;
 
   @media (max-width: 768px) {
-    padding: 1em; // Reduziere den Abstand in der mobilen Ansicht
+    padding: 1em; // Reduce spacing for mobile view
   }
 `;
 
@@ -29,7 +28,7 @@ const Title = styled.h2`
   color: #f2f2f2;
 
   @media (max-width: 768px) {
-    font-size: 1.4em; // Kleinere Schriftgröße in der mobilen Ansicht
+    font-size: 1.4em; // Smaller font size for mobile view
   }
 `;
 
@@ -42,7 +41,7 @@ const EntryDate = styled.small`
   color: #90d2d8;
 
   @media (max-width: 768px) {
-    font-size: 0.7em; // Kleinere Schriftgröße in der mobilen Ansicht
+    font-size: 0.7em; // Smaller font size for mobile view
   }
 `;
 
@@ -59,7 +58,7 @@ const BookmarkButton = styled.button`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    top: 0.2em; // Position oben in der mobilen Ansicht
+    top: 0.2em; // Position at the top for mobile view
     right: 0.2em;
   }
 `;
@@ -77,7 +76,7 @@ const Button = styled.button`
   font-size: 1em;
 
   @media (max-width: 768px) {
-    font-size: 0.9em; // Kleinere Schriftgröße in der mobilen Ansicht
+    font-size: 0.9em; // Smaller font size for mobile view
   }
 `;
 
@@ -92,21 +91,18 @@ const TagList = styled.ul`
   list-style: none;
 
   @media (max-width: 768px) {
-    gap: 0.2em; // Kleinere Lücke zwischen Tags in der mobilen Ansicht
+    gap: 0.2em;
   }
 `;
-
-
 
 const Tag = styled.li`
   padding: 0.2em;
   font-size: 0.9em;
 
   @media (max-width: 768px) {
-    font-size: 0.7em; // Kleinere Schriftgröße für Tags in der mobilen Ansicht
+    font-size: 0.7em; // Smaller font size for mobile view
   }
 `;
-
 
 export default function EntryComponent(props: props) {
     const date: string = new Date(props.blogEntry.timeCreated).toLocaleDateString();
@@ -115,7 +111,8 @@ export default function EntryComponent(props: props) {
     const navigateTo = useNavigate();
 
     function handleClickBookmark() {
-        console.log("Bookmark was clicked.");
+        // Display a pop-up instead of a console output
+        window.alert("Bookmark was clicked.");
     }
 
     function handleClickMore() {

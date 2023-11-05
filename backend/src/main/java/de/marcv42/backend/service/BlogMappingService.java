@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import javax.swing.JOptionPane; // Importiere die JOptionPane-Klasse
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +46,6 @@ public class BlogMappingService
         if (authentication != null && authentication.getPrincipal() instanceof OAuth2User) {
             OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
 
-
             String login = (String) oauth2User.getAttribute("login");
 
             if (login != null)
@@ -53,17 +53,22 @@ public class BlogMappingService
                 return login;
             } else
             {
-                throw new RuntimeException("Couldn't get Login from OAuth2User");
+                // Zeige einen Fehler-Popup, wenn der Login nicht gefunden wurde
+                showErrorPopup("Error: Could not retrieve login from OAuth2User.");
+                throw new RuntimeException("Could not retrieve login from OAuth2User.");
             }
         }
         else
         {
-            throw new RuntimeException("Couldn't get Authentication or Authentication Principal was not an OAuth2User");
+            // Zeige einen Fehler-Popup, wenn die Authentication oder der Principal kein OAuth2User ist
+            showErrorPopup("Error: Could not get Authentication or Principal is not an OAuth2User.");
+            throw new RuntimeException("Could not get Authentication or Principal is not an OAuth2User.");
         }
     }
+
+    private void showErrorPopup(String errorMessage)
+    {
+        // Zeige ein Pop-up-Fenster mit der Fehlermeldung
+        JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
-
-
-
-
-
