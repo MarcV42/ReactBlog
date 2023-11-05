@@ -18,7 +18,7 @@ const Container = styled.li`
   gap: 0.4em;
 
   @media (max-width: 768px) {
-    padding: 1em; // Reduce spacing for mobile view
+    padding: 1em;
   }
 `;
 
@@ -28,7 +28,7 @@ const Title = styled.h2`
   color: #f2f2f2;
 
   @media (max-width: 768px) {
-    font-size: 1.4em; // Smaller font size for mobile view
+    font-size: 1.4em;
   }
 `;
 
@@ -41,7 +41,7 @@ const EntryDate = styled.small`
   color: #90d2d8;
 
   @media (max-width: 768px) {
-    font-size: 0.7em; // Smaller font size for mobile view
+    font-size: 0.7em;
   }
 `;
 
@@ -58,7 +58,7 @@ const BookmarkButton = styled.button`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    top: 0.2em; // Position at the top for mobile view
+    top: 0.2em;
     right: 0.2em;
   }
 `;
@@ -76,7 +76,7 @@ const Button = styled.button`
   font-size: 1em;
 
   @media (max-width: 768px) {
-    font-size: 0.9em; // Smaller font size for mobile view
+    font-size: 0.9em;
   }
 `;
 
@@ -100,7 +100,15 @@ const Tag = styled.li`
   font-size: 0.9em;
 
   @media (max-width: 768px) {
-    font-size: 0.7em; // Smaller font size for mobile view
+    font-size: 0.7em;
+  }
+`;
+
+const TruncatedText = styled.p`
+  word-break: normal;
+  white-space: pre-line;
+  @media (max-width: 768px) {
+    font-size: 0.9em;
   }
 `;
 
@@ -111,7 +119,6 @@ export default function EntryComponent(props: props) {
     const navigateTo = useNavigate();
 
     function handleClickBookmark() {
-        // Display a pop-up instead of a console output
         window.alert("Bookmark was clicked.");
     }
 
@@ -119,16 +126,16 @@ export default function EntryComponent(props: props) {
         navigateTo("/details/" + props.blogEntry.id);
     }
 
-    function truncateString(str: string, maxLength: number) {
-        if (str.length <= maxLength) {
-            return str;
-        } else {
-            return str.slice(0, maxLength) + "...";
+    function truncateTextByLineCount(text: string, lineCount: number) {
+        const lines = text.split("\n");
+        if (lines.length > lineCount) {
+            return lines.slice(0, lineCount).join("\n") + "...";
         }
+        return text;
     }
 
     const mainTextfieldText = props.blogEntry.content;
-    const truncatedString = truncateString(mainTextfieldText, 122);
+    const truncatedText = truncateTextByLineCount(mainTextfieldText, 2500);
 
     return (
         <Container>
@@ -138,7 +145,7 @@ export default function EntryComponent(props: props) {
             <BookmarkButton type="button" onClick={handleClickBookmark}>
                 <img src={BookmarkSvg} alt="Bookmark" />
             </BookmarkButton>
-            <p>{truncatedString}</p>
+            <TruncatedText>{truncatedText}</TruncatedText>
             <Button type="button" onClick={handleClickMore}>
                 Show more
             </Button>

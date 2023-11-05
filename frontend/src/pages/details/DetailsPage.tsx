@@ -1,7 +1,7 @@
 import AppHeader from "../../components/AppHeader.tsx";
-import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {BlogEntry} from "../../model/BlogEntryModel.tsx";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BlogEntry } from "../../model/BlogEntryModel.tsx";
 import axios from "axios";
 import BookmarkSvg from "../../assets/bookmark.svg";
 import TrashSvg from "../../assets/trash.svg";
@@ -35,12 +35,13 @@ const Container = styled.div`
   position: relative;
   gap: 0.4em;
   margin: -0.8em 0.4em 0.4em;
+  overflow: hidden;
 `;
 
 const Heading = styled.h2`
   font-size: 2em;
   align-self: center;
-  color: #f7c297
+  color: #f7c297;
 `;
 
 const EntryDate = styled.small`
@@ -49,7 +50,7 @@ const EntryDate = styled.small`
   top: 0.4em;
   left: 0.4em;
   font-size: 0.8em;
-  color: #90d2d8
+  color: #90d2d8;
 `;
 
 const BookmarkButton = styled.button`
@@ -91,6 +92,12 @@ const ButtonImage = styled.img`
   width: 1.4em;
 `;
 
+const BlogContent = styled.p`
+  font-size: 1.4em;
+  white-space: pre-wrap;
+  word-break: break-word;
+`;
+
 const TagList = styled.ul`
   display: flex;
   flex-direction: row;
@@ -103,23 +110,31 @@ const TagList = styled.ul`
 `;
 
 const Tag = styled.li`
-  padding: 0.2em;`;
+  padding: 0.2em;
+`;
 
 export default function DetailsPage() {
-    const {id} = useParams();
-    const [blogEntry, setBlogEntry] = useState<BlogEntry>( {} as BlogEntry);
+    const { id } = useParams();
+    const [blogEntry, setBlogEntry] = useState<BlogEntry>({} as BlogEntry);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-    const navigateTo = useNavigate()
+    const navigateTo = useNavigate();
 
     const BlogTitle = blogEntry.title;
-    const BlogContent = blogEntry.content;
     const BlogTimeCreated = blogEntry.timeCreated;
 
-    const date: string = new Date(BlogTimeCreated).toLocaleDateString()
-    const timeOptions: Intl.DateTimeFormatOptions = {hour: '2-digit', minute: '2-digit'};
-    const time: string = new Date(BlogTimeCreated).toLocaleTimeString(undefined, timeOptions);
-
+    const date: string = new Date(BlogTimeCreated).toLocaleDateString();
+    const timeOptions: Intl.DateTimeFormatOptions = {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZoneName: "short",
+        timeZone: "UTC",
+    };
+    const time: string = new Date(BlogTimeCreated).toLocaleTimeString(
+        undefined,
+        timeOptions
+    );
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -147,42 +162,44 @@ export default function DetailsPage() {
     }
 
     function handleEditEntry() {
-        navigateTo("/edit-entry/" + id)
+        navigateTo("/edit-entry/" + id);
     }
 
     function handleClickBookmark() {
-        console.log("Bookmark was clicked.")
+        alert("Bookmark was clicked.");
     }
 
-    if (loading) return <div>Loading...</div>
-    if (error) return <div>Something went wrong</div>
-    return  <>
-        <AppHeader headerText="Blog Entry"/>
-        <ReturnButton type="button" onClick={() => navigateTo(- 1)}>
-            <ReturnButtonImage src={BackSvg} alt="Go back arrow icon"/>
-        </ReturnButton>
-        <Container>
-            <Heading>{BlogTitle}</Heading>
-            <EntryDate>{date + " " + time}</EntryDate>
-            <BookmarkButton type="button" onClick={handleClickBookmark}>
-                <img src={BookmarkSvg}
-                     alt="Bookmark"/>
-            </BookmarkButton>
-            <p>{BlogContent}</p>
-            <ButtonContainer>
-                <Button type="button" onClick={() => handleDeleteEntry(id ? id: "")}>
-                    <ButtonImage src={TrashSvg} alt="Trash Icon"/>Delete
-                </Button>
-                <Button type="button" onClick={handleEditEntry}>
-                    <ButtonImage src={PencilSvg} alt="Pencil Icon"/>Edit
-                </Button>
-            </ButtonContainer>
-            <TagList>
-                {blogEntry?.hashtags.map((hashtag, index) => (
-                    <Tag key={index}>{hashtag}</Tag>
-                ))}
-            </TagList>
-
-        </Container>
-    </>
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Something went wrong</div>;
+    return (
+        <>
+            <AppHeader headerText="Blog Entry" />
+            <ReturnButton type="button" onClick={() => navigateTo(-1)}>
+                <ReturnButtonImage src={BackSvg} alt="Go back arrow icon" />
+            </ReturnButton>
+            <Container>
+                <Heading>{BlogTitle}</Heading>
+                <EntryDate>{date + " " + time}</EntryDate>
+                <BookmarkButton type="button" onClick={handleClickBookmark}>
+                    <img src={BookmarkSvg} alt="Bookmark" />
+                </BookmarkButton>
+                <BlogContent>{blogEntry.content}</BlogContent>
+                <ButtonContainer>
+                    <Button type="button" onClick={() => handleDeleteEntry(id ? id : "")}>
+                        <ButtonImage src={TrashSvg} alt="Trash Icon" />
+                        Delete
+                    </Button>
+                    <Button type="button" onClick={handleEditEntry}>
+                        <ButtonImage src={PencilSvg} alt="Pencil Icon" />
+                        Edit
+                    </Button>
+                </ButtonContainer>
+                <TagList>
+                    {blogEntry?.hashtags.map((hashtag, index) => (
+                        <Tag key={index}>{hashtag}</Tag>
+                    ))}
+                </TagList>
+            </Container>
+        </>
+    );
 }
