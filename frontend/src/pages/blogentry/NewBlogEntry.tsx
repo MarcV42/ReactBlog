@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +6,6 @@ import styled from "styled-components";
 import AppHeader from "../../components/AppHeader.tsx";
 import AddSvg from "../../assets/plus-circle.svg";
 import MinusSvg from "../../assets/minus-circle.svg";
-
-
 
 const Main = styled.main`
   display: flex;
@@ -81,7 +78,7 @@ const TagLabel = styled.label`
 `;
 
 const TagInput = styled.input`
-  width: 70%; // Breite des Hashtag-Eingabefelds auf 70 %
+  width: 70%;
   font-size: 1.2em;
 `;
 
@@ -108,7 +105,7 @@ const SubmitButton = styled.button`
   background-color: #3E608C;
   border: none;
   font-weight: 500;
-  cursor: grab;
+  cursor: pointer;
   width: 100%;
 `;
 
@@ -116,14 +113,13 @@ export default function NewBlogEntry() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [tags, setTags] = useState<Tag[]>([{ name: "" }]);
+    const navigateTo = useNavigate();
 
     const changeTagName = (index: number, name: string) => {
         const newTags = [...tags];
         newTags[index].name = name;
         setTags(newTags);
     };
-
-    const navigateTo = useNavigate();
 
     function handleOnSubmit() {
         const filteredTags = tags.filter((tag) => tag.name !== "");
@@ -139,7 +135,8 @@ export default function NewBlogEntry() {
             .post("/api/blogs", newBlogEntry)
             .then(() => navigateTo("/"))
             .catch((error) => {
-                console.error("Fehler beim Speichern:", error);
+                // Display a pop-up for the error
+                alert("Error while saving: " + error.message);
             });
     }
 
@@ -153,10 +150,9 @@ export default function NewBlogEntry() {
 
     const insertTag = (index: number) => {
         const newTags = [...tags];
-        newTags.splice(index + 1, 0, { name: "" }); // Fügt ein leeres Tag nach dem aktuellen Index hinzu
+        newTags.splice(index + 1, 0, { name: "" });
         setTags(newTags);
     };
-
 
     return (
         <>
@@ -167,13 +163,13 @@ export default function NewBlogEntry() {
                     placeholder="What's on my mind right now"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
-                ></TitleInput>
+                />
                 <ContentTextarea
                     rows={15}
-                    placeholder={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr."}
+                    placeholder="Enter your Text"
                     value={text}
                     onChange={(event) => setText(event.target.value)}
-                ></ContentTextarea>
+                />
                 <TagsTitle>Enter Hashtags:</TagsTitle>
                 <TagContainer>
                     {tags &&
@@ -183,10 +179,9 @@ export default function NewBlogEntry() {
                                 <TagInput
                                     id={"tag" + (index + 1)}
                                     value={tag.name}
-                                    placeholder={"#HashTag"}
+                                    placeholder="#HashTag"
                                     onChange={(event) => changeTagName(index, event.target.value)}
                                 />
-
                                 <TagButton type="button" onClick={() => removeTag(index)}>
                                     <ButtonImage src={MinusSvg} alt="Minus Icon" />
                                 </TagButton>
