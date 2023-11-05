@@ -151,14 +151,17 @@ export default function DetailsPage() {
     }, [id]);
 
     function handleDeleteEntry(id: string) {
-        axios
-            .delete("/api/blogs/" + id)
-            .then(() => {
-                navigateTo("/");
-            })
-            .catch((error) => {
-                console.error("Fehler beim Löschen", error);
-            });
+        // Bestätigungspopup
+        if (window.confirm("Are you sure you want to delete this blog entry?")) {
+            axios
+                .delete("/api/blogs/" + id)
+                .then(() => {
+                    navigateTo("/");
+                })
+                .catch((error) => {
+                    console.error("Fehler beim Löschen", error);
+                });
+        }
     }
 
     function handleEditEntry() {
