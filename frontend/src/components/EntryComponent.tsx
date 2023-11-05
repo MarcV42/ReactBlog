@@ -147,7 +147,7 @@ export default function EntryComponent(props: props) {
             </BookmarkButton>
             <TruncatedText>{truncatedText}</TruncatedText>
             <Button type="button" onClick={handleClickMore}>
-                Show more
+                Edit & more
             </Button>
             <TagList>
                 {props.blogEntry.hashtags.map((hashtag, index) => (
