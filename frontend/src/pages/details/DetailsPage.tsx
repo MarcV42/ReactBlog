@@ -51,6 +51,7 @@ const EntryDate = styled.small`
   left: 0.4em;
   font-size: 0.8em;
   color: #90d2d8;
+  
 `;
 
 const BookmarkButton = styled.button`
@@ -70,6 +71,7 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.4em;
+  
 `;
 
 const Button = styled.button`

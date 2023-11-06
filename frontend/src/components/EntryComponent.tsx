@@ -8,14 +8,14 @@ export type props = {
 };
 
 const Container = styled.li`
-  border: 0.4em #733f34 solid;
-  border-radius: 10px;
+  border: 0.22em #3E608C solid;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding: 2em;
+  padding: 0.7em;
   position: relative;
-  gap: 0.4em;
+  gap: 0.8em;
 
   @media (max-width: 768px) {
     padding: 1em;

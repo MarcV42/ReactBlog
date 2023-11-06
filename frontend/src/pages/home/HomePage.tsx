@@ -7,8 +7,9 @@ import { BlogEntry } from "../../model/BlogEntryModel.tsx";
 import AppHeader from "../../components/AppHeader.tsx";
 import styled from "styled-components";
 import AddIcon from "../../assets/plus-circle.svg";
-import { saveAs } from 'file-saver';
-import ExcelJS from 'exceljs';
+import { saveAs } from "file-saver";
+import ExcelJS from "exceljs";
+import "./HomePage.css"; // Import the CSS file for styling
 
 // Main container for the HomePage
 const Main = styled.main`
@@ -22,12 +23,12 @@ const Main = styled.main`
 const NewEntryButton = styled.button`
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.4em;
-  font-size: 1.9em;
-  font-weight: 500;
-  background-color: #3e608c;
+  padding: 0.3em;
+  font-size: 2.3em;
+  font-weight: 680;
+  background-color: #3a608c;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 4.25s;
   position: relative;
 `;
 
@@ -36,8 +37,9 @@ const AddButtonIcon = styled.img`
   color: #3e608c;
   width: 1.4em;
   position: absolute;
-  top: 0.2em;
-  left: 1.5em;
+  top: 0.4em;
+  left: 2.4em;
+  font-size: 30px;
 `;
 
 // Container for displaying a list of blog entries
@@ -47,7 +49,6 @@ const BlogList = styled.ul`
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  padding: 1em;
   gap: 1em;
   font-size: 1.1em;
   border-radius: 8px;
@@ -57,6 +58,33 @@ const BlogList = styled.ul`
   background-color: rgb(166, 115, 96);
   cursor: text;
   transition: border-color 0.25s;
+  position: relative;
+`;
+
+// Small new entry button
+const NewEntryButtonSmall = styled.button`
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.2em;
+  font-size: 1.3em;
+  font-weight: 200;
+  background-color: #A67360FF;
+  cursor: pointer;
+  transition: border-color 0.95s;
+  position: relative;
+`;
+
+// Small new entry button for Excel export
+const NewEntryButtonSmallExc = styled.button`
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.1em;
+  font-size: 1.0em;
+  font-weight: 200;
+  color: #242424;
+  background-color: #dbba60;
+  cursor: pointer;
+  transition: border-color 0.95s;
   position: relative;
 `;
 
@@ -167,18 +195,18 @@ export default function HomePage() {
             <AppHeader headerText="MyBlog App" />
             <Main>
                 <p>This is the place to express and document your daily happenings</p>
-                <button onClick={login}>Log in</button>
-                <button onClick={whoAmI}>Show my user ID</button>
+                <NewEntryButtonSmall type="button" onClick={login}>Log in</NewEntryButtonSmall>
+                <NewEntryButtonSmall onClick={whoAmI}>Show my User ID</NewEntryButtonSmall>
                 {isLoggedIn && <p>You are logged in successfully! {userId} (User ID)</p>}
                 {isLoggedIn && (
-                    <button type="button" onClick={handleLogout}>
+                    <NewEntryButtonSmall type="button" onClick={handleLogout}>
                         Logout
-                    </button>
+                    </NewEntryButtonSmall>
                 )}
                 <NewEntryButton type="button" onClick={() => navigateTo('/newentry')}>
                     <AddButtonIcon src={AddIcon} alt="Add Icon" />New Entry
                 </NewEntryButton>
-                <button onClick={ExcelExport}>Export Excel-File</button>
+                <NewEntryButtonSmallExc onClick={ExcelExport}>Export Excel-File</NewEntryButtonSmallExc>
                 <SortingComponent entries={entries} setEntries={setEntries} />
                 <BlogList>
                     {entries.slice().reverse().map((entry) => {
