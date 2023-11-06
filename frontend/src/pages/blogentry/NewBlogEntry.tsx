@@ -16,9 +16,9 @@ const Main = styled.main`
 `;
 
 const TitleInput = styled.input`
-  font-size: 1.9em;
+  font-size: 1.4em;
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 0.22em #3E608C solid;
   padding: 0.4em;
   font-weight: 500;
   background-color: rgb(166, 115, 96);
@@ -30,8 +30,8 @@ const TitleInput = styled.input`
 const ContentTextarea = styled.textarea`
   font-size: 1.2em;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.4em;
+  border: 0.22em #3E608C solid;
+  padding: 0.7em;
   font-weight: 500;
   background-color: rgb(157, 133, 118);
   cursor: text;
@@ -53,7 +53,7 @@ const TagContainer = styled.div`
   gap: 0.4em;
   font-size: 1.2em;
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 0.22em #3E608C solid;
   padding: 0.4em;
   font-weight: 500;
   background-color: rgba(45, 51, 50, 0.71);
@@ -79,7 +79,7 @@ const TagLabel = styled.label`
 
 const TagInput = styled.input`
   width: 70%;
-  font-size: 1.2em;
+  font-size: 1em;
 `;
 
 const TagButton = styled.button`
@@ -101,7 +101,7 @@ const ButtonImage = styled.img`
 const SubmitButton = styled.button`
   border-radius: 8px;
   padding: 0.8em;
-  font-size: 2em;
+  font-size: 1.9em;
   background-color: #3E608C;
   border: none;
   font-weight: 500;
@@ -160,7 +160,7 @@ export default function NewBlogEntry() {
             <Main>
                 <TitleInput
                     type="text"
-                    placeholder="What's on my mind right now"
+                    placeholder="Title"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                 />

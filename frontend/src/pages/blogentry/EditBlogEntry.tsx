@@ -17,20 +17,38 @@ const EditForm = styled.form`
 
 const TitleInput = styled.input`
   font-size: 1.4em;
+  border-radius: 8px;
+  border: 0.22em #3E608C solid;
+  padding: 0.4em;
+  font-weight: 500;
+  background-color: rgb(166, 115, 96);
+  cursor: text;
+  transition: border-color 0.25s;
+  position: relative;
 `;
 
 const ContentTextarea = styled.textarea`
   font-size: 1.2em;
+  border-radius: 8px;
+  border: 0.22em #3E608C solid;
+  padding: 0.7em;
+  font-weight: 500;
+  background-color: rgb(157, 133, 118);
+  cursor: text;
+  transition: border-color 0.25s;
+  position: relative;
 `;
 
 const TagsTitle = styled.span`
   font-size: 1.2em;
+  padding: 0.2em;
 `;
 
 const TagContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4em;
+  padding: 0.1em;
 `;
 
 const SingleTag = styled.div`
@@ -50,6 +68,7 @@ const TagLabel = styled.label`
 
 const TagInput = styled.input`
   font-size: 1.2em;
+  padding: 0.2em;
 `;
 
 const TagButton = styled.button`
@@ -77,7 +96,7 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   border-radius: 10px;
   padding: 0.6em;
-  background-color: #90d2d8;
+  background-color: #3E608C;
   border: none;
   cursor: pointer;
   width: 100%;

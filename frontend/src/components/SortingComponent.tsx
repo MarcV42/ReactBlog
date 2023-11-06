@@ -17,19 +17,25 @@ const Container = styled.div`
   gap: 0.4em;
   border-radius: 8px;
   border: 1px solid transparent;
-  background-color: #733f34;
+  background-color: #90d2d8;
+  font-size: 0.85em;
+  
   padding: 0.4em;
   position: relative;
 `;
 
-
+// Font size newest to oldest
 const SortSelect = styled.select`
-  font-size: 1.4em;
+  font-size: 1.3em;
+  color: #242424;
+  border-radius: 6px;
+  border-color: #74efff;
+  background-color: rgba(91, 227, 243, 0.36);
 
 `;
 
 const SortOption = styled.option`
-  font-size: 0.6em;
+  font-size: 0.8em;
 `;
 
 export default function SortingComponent(props: props) {
