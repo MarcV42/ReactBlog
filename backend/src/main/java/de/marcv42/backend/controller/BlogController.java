@@ -51,5 +51,6 @@ public class BlogController
     {
         return blogService.updateBlogEntry(id, updatedBlog);
     }
+
 }
 
