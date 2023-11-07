@@ -116,14 +116,14 @@ export default function HomePage() {
         <>
             <AppHeader headerText="MyBlog App" />
             <div className="main">
-                <p>This is the place to express and document your daily happenings</p>
+                <p className="WelcomeQuote-button">This is the place to express and document your daily happenings</p>
                 <button className="Login-button" type="button" onClick={login}>
                     Log in
                 </button>
                 <button className="ShowUser-button" onClick={whoAmI}>
                     Show my User ID
                 </button>
-                {isLoggedIn && <p>You are logged in successfully! {userId} (User ID)</p>}
+                {isLoggedIn && <p className="ClassicGreen-button">You are logged in successfully! {userId} (User ID)</p>}
                 {isLoggedIn && (
                     <button className="Logout-button" type="button" onClick={handleLogout}>
                         Logout

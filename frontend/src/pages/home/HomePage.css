@@ -29,6 +29,46 @@
     position: relative;
 }
 
+.WelcomeQuote-button {
+    border-radius: 1px;
+    border: 1px solid transparent;
+    padding: 0.3em;
+    font-size: 1.3em;
+    font-weight: 480;
+    font-family: "Droid Serif";
+
+    color: #e5ccae;
+    cursor: none;
+    white-space: nowrap; /* Prevent line breaks */
+
+    /* CSS animations for the marquee */
+    animation: moveText 15s linear infinite; /* Animation for 15 seconds, repeating infinitely */
+}
+
+/* Define keyframes animation */
+@keyframes moveText {
+    from {
+        transform: translateX(100%); /* Starting position (right outside of the container) */
+    }
+    to {
+        transform: translateX(-100%); /* Ending position (left outside of the container) */
+    }
+}
+
+
+.ClassicGreen-button{
+    border-radius: 1px;
+    border: 1px solid transparent;
+    padding: 0.3em;
+    font-size: 1.03em;
+    font-weight: 280;
+    background-color: #000000;
+    color: #99ff54;
+    cursor: unset;
+    transition: border-color 2.25s;
+    position: relative;
+}
+
 .Logout-button{
     border-radius: 8px;
     border: 1px solid transparent;
