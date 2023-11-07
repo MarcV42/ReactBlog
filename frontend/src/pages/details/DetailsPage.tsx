@@ -26,7 +26,7 @@ const ReturnButtonImage = styled.img`
 `;
 
 const Container = styled.div`
-  border: 0.4em #F288A4 solid;
+  border: 0.37em #F288A4 solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 2em;
+  font-size: 1.6em;
   align-self: center;
   color: #f7c297;
 `;
@@ -47,9 +47,9 @@ const Heading = styled.h2`
 const EntryDate = styled.small`
   align-self: flex-start;
   position: absolute;
-  top: 0.4em;
-  left: 0.4em;
-  font-size: 0.8em;
+  bottom: 0.4em;
+  right: 0.4em;
+  font-size: 0.9em;
   color: #90d2d8;
   
 `;
@@ -70,7 +70,7 @@ const BookmarkButton = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.4em;
+  gap: 0.5em;
   
 `;
 
@@ -84,18 +84,18 @@ const Button = styled.button`
   cursor: pointer;
   width: 100%;
   height: 3em;
-  font-size: 1em;
+  font-size: 1.2em;
 `;
 
 const ButtonImage = styled.img`
   position: absolute;
-  left: 0.6em;
+  left: 0.7em;
   top: 0.8em;
   width: 1.4em;
 `;
 
 const BlogContent = styled.p`
-  font-size: 1.4em;
+  font-size: 1.2em;
   white-space: pre-wrap;
   word-break: break-word;
 `;
@@ -109,10 +109,11 @@ const TagList = styled.ul`
   width: 100%;
   gap: 0.4em;
   list-style: none;
+  font-size: 0.9em;
 `;
 
 const Tag = styled.li`
-  padding: 0.2em;
+  padding: 0.3em;
 `;
 
 export default function DetailsPage() {
