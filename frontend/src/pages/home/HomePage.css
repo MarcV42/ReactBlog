@@ -35,7 +35,7 @@
     padding: 0.3em;
     font-size: 1.3em;
     font-weight: 480;
-    font-family: "Droid Serif";
+    font-family: "Droid Serif", serif; /* "serif" is a generic font family */
 
     color: #e5ccae;
     cursor: none;
@@ -54,6 +54,7 @@
         transform: translateX(-100%); /* Ending position (left outside of the container) */
     }
 }
+
 
 
 .ClassicGreen-button{
