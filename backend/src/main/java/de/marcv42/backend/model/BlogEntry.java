@@ -26,5 +26,4 @@ public class BlogEntry {
     private Instant timeCreated;
 
     private String author;
-
 }
