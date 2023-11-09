@@ -162,10 +162,12 @@ export default function DetailsPage() {
                     navigateTo("/");
                 })
                 .catch((error) => {
-                    console.error("Fehler beim Löschen", error);
+                    const errorMessage = "Error while deleting: " + error.message;
+                    window.alert(errorMessage); // Shows Popup
                 });
         }
     }
+
 
     function handleEditEntry() {
         navigateTo("/edit-entry/" + id);
